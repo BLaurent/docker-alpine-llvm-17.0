@@ -1,24 +1,15 @@
-# docker-mysql-python3.5-scientific
+# docker-alpine-llvm-7.0
 
-This project generates a Docker image, that is based on the image [larsklitzke/mysql-python3.5](https://github.com/larsklitzke/docker-mysql-python3.5)
-which contains a mysql-client and python in version 3.5, for data analysis. Therefore, it adds the following python 
-packages:
-
-* numpy
-* scipy
-* numba
-* pandas
-* matplotlib
-* Pillow
-* PyYAML
+This project generates a Docker image based on the latest Alpine version with LLVM in 
+version 7.0. That image can for instance be used for Python-project that uses numba >= 0.42.0.
 
 # Docker image
-The latest version of the image is hosted on [Dockerhub](https://hub.docker.com/r/larsklitzke/mysql-python3.5-scientific/). 
+The latest version of the image is hosted on [Dockerhub](https://hub.docker.com/r/larsklitzke/alpine-llvm7.0). 
 
 You can use the image in your project by pulling it from Dockerhub with
 
 ```bash
 
-  docker pull larsklitzke/mysql-python3.5-scientific
+  docker pull larsklitzke/alpine-llvm7.0
   
 ```
