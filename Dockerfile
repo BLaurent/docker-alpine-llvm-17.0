@@ -15,9 +15,13 @@ RUN apk --no-cache add \
 	make \
 	python
 
-
+# configure LLVM using CMake
 RUN cd llvm-7.0.1.src && mkdir build && cd build && cmake .. \
     -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" \
     -DCMAKE_BUILD_TYPE=MinSizeRel
 
-RUN cd llvm-7.0.1.src/build && ls -l && make -j && make install
+# build and install LLVM
+RUN cd llvm-7.0.1.src/build && make -j 1 && make install
+
+# cleanup
+RUN rm -r llvm-7.0.1.src
