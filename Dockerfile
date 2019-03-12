@@ -13,7 +13,9 @@ RUN apk --no-cache add \
 	gcc \
 	cmake \
 	make \
-	python
+    libxml2-dev \
+    python2 \
+    ncurses-dev
 
 # configure LLVM using CMake
 RUN cd llvm-7.0.1.src && mkdir build && cd build && cmake .. \
@@ -21,7 +23,7 @@ RUN cd llvm-7.0.1.src && mkdir build && cd build && cmake .. \
     -DCMAKE_BUILD_TYPE=MinSizeRel
 
 # build and install LLVM
-RUN cd llvm-7.0.1.src/build && make -j 1 && make install
+RUN cd llvm-7.0.1.src/build && make -j$(nproc) && make install
 
 # cleanup
 RUN rm -r llvm-7.0.1.src
