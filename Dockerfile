@@ -25,5 +25,6 @@ RUN cd llvm-7.0.1.src && mkdir build && cd build && cmake .. \
 # build and install LLVM
 RUN cd llvm-7.0.1.src/build && make -j$(nproc) && make install
 
+RUN cd llvm-7.0.1.src/build && make -j test
 # cleanup
 RUN rm -r llvm-7.0.1.src
