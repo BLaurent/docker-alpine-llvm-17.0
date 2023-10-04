@@ -1,8 +1,8 @@
 FROM alpine:latest
 MAINTAINER Lars Klitzke <Lars.Klitzke@gmail.com>
 
-# install llvm in version 7.0.x
-RUN wget http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz && tar xvf llvm-7.0.1.src.tar.xz
+# install llvm in version 17.0.x
+RUN wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.2/llvm-17.0.2.src.tar.xz && tar xvf llvm-17.0.2.src.tar.xz
 
 # add llvm dependencies
 RUN apk --no-cache add \
@@ -13,18 +13,18 @@ RUN apk --no-cache add \
 	gcc \
 	cmake \
 	make \
-    libxml2-dev \
-    python2 \
-    ncurses-dev
+	libxml2-dev \
+	python2 \
+	ncurses-dev
 
 # configure LLVM using CMake
-RUN cd llvm-7.0.1.src && mkdir build && cd build && cmake .. \
+RUN cd llvm-17.0.2.src && mkdir build && cd build && cmake .. \
     -G "Unix Makefiles" -DLLVM_TARGETS_TO_BUILD="X86" \
     -DCMAKE_BUILD_TYPE=MinSizeRel
 
 # build and install LLVM
-RUN cd llvm-7.0.1.src/build && make -j$(nproc) && make install
+RUN cd llvm-17.0.2.src/build && make -j$(nproc) && make install
 
-RUN cd llvm-7.0.1.src/build && make -j test
+RUN cd llvm-17.0.2.src/build && make -j test
 # cleanup
-RUN rm -r llvm-7.0.1.src
+RUN rm -r llvm-17.0.2.src
